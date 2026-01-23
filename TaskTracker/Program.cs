@@ -8,5 +8,8 @@ var input = Console.ReadLine();
 
 if (input == "2")
 {
-    Console.WriteLine("Replace this with your About implementation.");
+    Console.WriteLine("Melissa Hegney");
+    Console.WriteLine("Merlissa09");
+    Console.WriteLine(DateTime.IsLeapYear(1998));
+    Console.WriteLine(DateTime.Now);
 }
