@@ -1,3 +1,5 @@
+using TaskTracker.TaskDomain;
+
 var shouldContinue = true;
 do
 {
@@ -16,9 +18,29 @@ do
             // list the tasks
             // TODO: add a project reference by turning the Domain into a Class Library
             TaskItem taskOne = new();
+            taskOne.Title = "Clean the chicken coop";
+            TaskItem taskTwo = new();
+            taskTwo.Title = "Finish convert px to rem";
+            TaskItem taskThree = new();
+            taskThree.Title = "Grade Week 3 Labs";
+
+            List<TaskItem> taskItems = [];
+            taskItems.Add(taskOne);
+            taskItems.Add(taskTwo);
+            taskItems.Add(taskThree);
+
+            foreach(var item in taskItems)
+            {
+                Console.WriteLine($"{item.Id}: {item.Title}");
+            }
+
+            Console.WriteLine(taskItems);
+            Console.WriteLine(TaskItem.TotalCount);
+
             break;
         case 2:
-
+    // dotnet restore
+    // dotnet build
             break;
         case 3:
             shouldContinue = false;
