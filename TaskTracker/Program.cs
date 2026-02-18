@@ -1,4 +1,4 @@
-using TaskTracker.TaskDomain;
+using TaskDomain;
 
 var shouldContinue = true;
 do
@@ -16,13 +16,9 @@ do
     {
         case 1:
             // list the tasks
-            // TODO: add a project reference by turning the Domain into a Class Library
-            TaskItem taskOne = new();
-            taskOne.Title = "Clean the chicken coop";
-            TaskItem taskTwo = new();
-            taskTwo.Title = "Finish convert px to rem";
-            TaskItem taskThree = new();
-            taskThree.Title = "Grade Week 3 Labs";
+            TaskItem taskOne = new("Clean the chicken coop");
+            TaskItem taskTwo = new("Finish convert px to rem");
+            TaskItem taskThree = new("Grade Week 3 Labs");
 
             List<TaskItem> taskItems = [];
             taskItems.Add(taskOne);
