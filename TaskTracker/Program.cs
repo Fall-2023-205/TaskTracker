@@ -1,45 +1,41 @@
 using TaskDomain;
+using TaskTracker;
 
 var shouldContinue = true;
 do
 {
     Console.WriteLine("Welcome to TaskTracker!");
-    Console.WriteLine("1. List Tasks");
-    Console.WriteLine("2. About");
-    Console.WriteLine("3. Exit");
+
+    foreach (var item in Enum.GetValues<MainMenu>())
+    {
+        Console.WriteLine($"{(int)item}. {item}");
+    }
+
     Console.Write("Choose an option: ");
 
     int.TryParse(Console.ReadLine(), null, out int input);
-
+    // this is a object representing our to do list
+    TaskItemService taskItemService = new();
+    taskItemService.PopulateInitialTaskItems();
 
     switch (input)
     {
-        case 1:
-            // list the tasks
-            TaskItem taskOne = new("Clean the chicken coop");
-            TaskItem taskTwo = new("Finish convert px to rem");
-            TaskItem taskThree = new("Grade Week 3 Labs");
+        case (int)MainMenu.ListTasks:
+            taskItemService.DisplayTaskItems();
+            break;
+        case (int)MainMenu.AddTask:
 
-            List<TaskItem> taskItems = [];
-            taskItems.Add(taskOne);
-            taskItems.Add(taskTwo);
-            taskItems.Add(taskThree);
-
-            foreach(var item in taskItems)
+            Console.WriteLine("What is the name of the task to add?");
+            var userInput = Console.ReadLine();
+            if (userInput != null)
             {
-                Console.WriteLine($"{item.Id}: {item.Title}");
+                // add logic to add a task
+                taskItemService.AddTask(userInput);
             }
-
-            Console.WriteLine(taskItems);
-            Console.WriteLine(TaskItem.TotalCount);
-
             break;
-        case 2:
-    // dotnet restore
-    // dotnet build
+        case (int)MainMenu.DeleteTask:
             break;
-        case 3:
-            shouldContinue = false;
+        case (int)MainMenu.UpdateTask:
             break;
         default:
             shouldContinue = false;

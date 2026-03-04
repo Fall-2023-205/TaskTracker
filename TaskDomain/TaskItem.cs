@@ -1,4 +1,4 @@
-namespace TaskTracker.TaskDomain;
+namespace TaskDomain;
 
 /// <summary>
 /// This class is a template/blueprint for our todo items
@@ -15,14 +15,17 @@ public class TaskItem
     }
 
     // constructor builds/constructs the object/instance
-    public TaskItem()
+    public TaskItem(string title)
     {
-        ++_totalCount;
+        Id = ++_totalCount;
+        Title = title;
     }
 
     // Instance properties
     // Instance properties belong to the object
-    public int Id;
+    public int Id { get; }
     public string Title = string.Empty;
     public bool IsComplete = false;
+
+    // TODO: Consider achievement system
 }
