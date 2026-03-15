@@ -1,7 +1,15 @@
 using TaskDomain;
 using TaskTracker;
 
+// TODO: if time later in the course discuss DI (dependency injection)
+
 var shouldContinue = true;
+
+List<TaskItem> taskItems = [new TaskItem("Grade midterms"), new TaskItem("Sew marker holder")];
+
+// this is a object representing our to do list
+TaskItemListService taskItemListService = new(taskItems);
+
 do
 {
     Console.WriteLine("Welcome to TaskTracker!");
@@ -14,14 +22,12 @@ do
     Console.Write("Choose an option: ");
 
     int.TryParse(Console.ReadLine(), null, out int input);
-    // this is a object representing our to do list
-    TaskItemService taskItemService = new();
-    taskItemService.PopulateInitialTaskItems();
+
 
     switch (input)
     {
         case (int)MainMenu.ListTasks:
-            taskItemService.DisplayTaskItems();
+            taskItemListService.DisplayTaskItems();
             break;
         case (int)MainMenu.AddTask:
 
@@ -30,10 +36,13 @@ do
             if (userInput != null)
             {
                 // add logic to add a task
-                taskItemService.AddTask(userInput);
+                taskItemListService.AddTask(userInput);
             }
             break;
         case (int)MainMenu.DeleteTask:
+            var success = int.TryParse(Console.ReadLine(), out int idToDelete);
+            if (success)
+                taskItemListService.DeleteTask(idToDelete);
             break;
         case (int)MainMenu.UpdateTask:
             break;
