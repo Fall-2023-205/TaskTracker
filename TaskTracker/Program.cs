@@ -40,9 +40,12 @@ do
             }
             break;
         case (int)MainMenu.DeleteTask:
+            Console.WriteLine("What is the ID of the task you'd like to delete?");
             var success = int.TryParse(Console.ReadLine(), out int idToDelete);
             if (success)
                 taskItemListService.DeleteTask(idToDelete);
+            else
+                Console.WriteLine("Your answer wasn't valid, please enter a different ID number");
             break;
         case (int)MainMenu.UpdateTask:
             break;

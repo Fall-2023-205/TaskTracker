@@ -51,11 +51,21 @@ public class TaskItemListService
         taskItems.Add(taskItem);
     }
 
-    public void DeleteTask(int id)
+    /// <summary>
+    /// Deletes any taskitems with a matching Id
+    /// </summary>
+    /// <param name="id">the int id that should be deleted</param>
+    /// <returns>the number of matches deleted</returns>
+    public int DeleteTask(int id)
     {
         // what is the task we want to delete
         // can identify by name, id
         // going to use id since it is guaranteed to be unique
+
+        // find the index of the id
+        // delete the index
+        // for a better ux should consider confirming the taskItem with the user before deleting
+        return taskItems.RemoveAll(taskItem => taskItem.Id == id);
 
     }
 
