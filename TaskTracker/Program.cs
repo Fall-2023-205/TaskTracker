@@ -1,10 +1,24 @@
+using TaskDomain;
+using TaskTracker;
+
+// TODO: if time later in the course discuss DI (dependency injection)
+
 var shouldContinue = true;
+
+List<TaskItem> taskItems = [new TaskItem("Grade midterms"), new TaskItem("Sew marker holder")];
+
+// this is a object representing our to do list
+TaskItemListService taskItemListService = new(taskItems);
+
 do
 {
     Console.WriteLine("Welcome to TaskTracker!");
-    Console.WriteLine("1. List Tasks");
-    Console.WriteLine("2. About");
-    Console.WriteLine("3. Exit");
+
+    foreach (var item in Enum.GetValues<MainMenu>())
+    {
+        Console.WriteLine($"{(int)item}. {item}");
+    }
+
     Console.Write("Choose an option: ");
 
     int.TryParse(Console.ReadLine(), null, out int input);
@@ -12,14 +26,28 @@ do
 
     switch (input)
     {
-        case 1:
-            // list the tasks
+        case (int)MainMenu.ListTasks:
+            taskItemListService.DisplayTaskItems();
             break;
-        case 2:
+        case (int)MainMenu.AddTask:
 
+            Console.WriteLine("What is the name of the task to add?");
+            var userInput = Console.ReadLine();
+            if (userInput != null)
+            {
+                // add logic to add a task
+                taskItemListService.AddTask(userInput);
+            }
             break;
-        case 3:
-            shouldContinue = false;
+        case (int)MainMenu.DeleteTask:
+            Console.WriteLine("What is the ID of the task you'd like to delete?");
+            var success = int.TryParse(Console.ReadLine(), out int idToDelete);
+            if (success)
+                taskItemListService.DeleteTask(idToDelete);
+            else
+                Console.WriteLine("Your answer wasn't valid, please enter a different ID number");
+            break;
+        case (int)MainMenu.UpdateTask:
             break;
         default:
             shouldContinue = false;
@@ -30,9 +58,7 @@ do
 
 void AboutMeInformation()
 {
-    Console.WriteLine("Melissa Hegney");
-    Console.WriteLine("Merlissa09");
-    Console.WriteLine(DateTime.IsLeapYear(1998));
-    Console.WriteLine(DateTime.Now);
+    Console.WriteLine("My name is Melissa Hegney");
+    Console.WriteLine("My GitHub name is Merlissa09");
     Console.WriteLine();
 }
