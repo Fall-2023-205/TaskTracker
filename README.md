@@ -2,7 +2,7 @@ fake readme
 
 # TaskTracker
 
-A task management application built with ASP.NET Core.
+A task management application built with ASP.NET Core and EF Core.
 
 ## Description
 
